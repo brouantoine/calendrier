@@ -21,6 +21,7 @@ ALLOWED_HOSTS = [
 
 # Confiance CSRF (fronts autorisés à envoyer des POST/PUT…)
 CSRF_TRUSTED_ORIGINS = [
+    "https://splendorous-biscuit-b61c7b.netlify.app",
     "https://assanvo.pythonanywhere.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -75,7 +76,9 @@ USE_TZ = True
 # CORS (appelle ton API depuis ces origines)
 # ─────────────────────────────────────────────────────────────────────────────
 CORS_ALLOW_ALL_ORIGINS = False
+
 CORS_ALLOWED_ORIGINS = [
+    "https://splendorous-biscuit-b61c7b.netlify.app",  # ← Netlify (AJOUT)
     "https://assanvo.pythonanywhere.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
