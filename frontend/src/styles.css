@@ -1,0 +1,121 @@
+/* ========= PALETTE CLAIRE (aucun fond noir) ========= */
+:root{
+  --primary:#FF6B00;
+  --primary-hover:#FFA040;
+  --bg:#FFFFFF;          /* fond page */
+  --bg-soft:#FFE5CC;     /* tuiles calendrier */
+  --card:#FFFFFF;        /* cartes / panneaux */
+  --text:#333333;        /* texte */
+  --muted:#666666;       /* sous-texte */
+  --line:#FFD9B3;        /* traits / bordures */
+  --shadow:0 4px 14px rgba(255,107,0,0.12);
+  --shadow-strong:0 10px 24px rgba(255,107,0,0.2);
+  --ok:#22c55e;
+}
+
+/* ===== base ===== */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,
+               "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  background: var(--bg);
+  color: var(--text);
+}
+h1,h2,h3,p,span,div,button{color:var(--text)}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* ===== NAVBAR unique ===== */
+.navbar{
+  position: sticky; top:0; z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.nav-left{display:flex; align-items:center; gap:12px; min-width:0}
+.logo-dot{width:12px;height:12px;border-radius:50%;background:var(--primary);
+  box-shadow:0 0 0 3px rgba(255,107,0,.18)}
+.brand-name{text-decoration:none;font-weight:800;color:var(--text)}
+.nav-title{margin-left:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.nav-right{display:flex; align-items:center; gap:10px}
+.badge-maker{
+  font-weight:700; text-decoration:none; background:#fff;
+  padding:8px 12px; border-radius:12px; border:1px solid var(--line);
+  box-shadow: var(--shadow); color: var(--text);
+}
+.gradtext{
+  background:linear-gradient(90deg,#ff6b00,#ff9333,#ffbd66);
+  -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:900;
+}
+
+/* Boutons */
+.button,.btn-pill{border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+.button{background:var(--primary); color:#fff; box-shadow:var(--shadow);
+  transition:transform .05s ease, box-shadow .15s ease, background .15s ease;}
+.button:hover{ background:var(--primary-hover); box-shadow:var(--shadow-strong) }
+.button.ghost{ background:var(--bg-soft); color:var(--text); box-shadow:var(--shadow) }
+.button.link{ background:transparent; color:var(--primary); padding:6px 8px }
+
+/* En-têtes / cartes / formulaires */
+.header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card,.detail-card{background:var(--card); border-radius:16px; padding:16px; border:1px solid var(--line); box-shadow:var(--shadow)}
+.input, select, textarea{width:100%; padding:12px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--text)}
+.row{display:grid; gap:12px}
+.row.cols-2{grid-template-columns:1fr 1fr}
+.row.cols-3{grid-template-columns:1fr 1fr 1fr}
+.link{color:var(--primary); font-weight:700; cursor:pointer}
+
+/* ======= CALENDRIER ======= */
+.calendar-wrap{ width:100% }
+
+.grid-head{
+  display:grid; grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:10px; margin:12px 0 8px; color:var(--muted); font-weight:800;
+}
+.grid-head-cell{text-align:center}
+
+/* Compat : certains composants utilisent .calendar et d’autres .calendar-grid */
+.calendar, .calendar-grid{
+  display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:10px;
+}
+
+.tile{
+  display:block; text-align:left; width:100%;
+  background:var(--bg-soft); border:1px solid var(--line);
+  border-radius:16px; min-height:92px; padding:12px; position:relative; cursor:pointer;
+  transition: box-shadow .15s ease, transform .02s ease;
+}
+.tile:hover{ box-shadow:var(--shadow-strong) }
+.tile--muted{ opacity:.5 }
+.tile .day{ font-weight:800; color:var(--muted) }
+.tile .mask{ display:block; margin-top:8px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden }
+.tile .dots{ display:inline-block; border-bottom:2px dotted var(--muted); width:100%; transform:translateY(-2px) }
+.tile .pip{ position:absolute; right:12px; bottom:12px; width:10px; height:10px; background:var(--ok); border-radius:50% }
+.badge{ position:absolute; right:10px; top:10px; background:var(--primary); color:#fff; font-weight:800; border-radius:999px; padding:2px 7px; font-size:12px; box-shadow:var(--shadow) }
+
+/* Liste du jour */
+.day-list{ display:grid; gap:12px }
+.day-card{
+  display:grid; grid-template-columns:72px 1fr 24px; align-items:center;
+  background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px; text-decoration:none;
+}
+.day-card:hover{ box-shadow:var(--shadow-strong) }
+.day-card .time{ font-weight:900; color:var(--primary); font-size:18px }
+.day-card .title{ font-weight:800; color:var(--text) }
+.day-card .meta{ margin-top:4px; display:flex; gap:6px; flex-wrap:wrap }
+.pill{ background:#FFF2E6; border:1px solid var(--line); color:var(--text); padding:4px 8px; border-radius:999px; font-weight:700; font-size:12px }
+
+/* Overlay loading (flou + volant) */
+.overlay{ position:fixed; inset:0; z-index:9999; background:rgba(255,255,255,.6); backdrop-filter: blur(6px);
+  display:flex; align-items:center; justify-content:center; }
+.helm{ animation: helm-rotate 2s linear infinite }
+@keyframes helm-rotate{ to { transform: rotate(360deg) } }
+
+/* ======= Mobile : scroll horizontal propre ======= */
+@media (max-width:900px){
+  .calendar-wrap{ overflow-x:auto; padding-bottom:8px }
+  .grid-head, .calendar, .calendar-grid{ min-width:700px }
+}
