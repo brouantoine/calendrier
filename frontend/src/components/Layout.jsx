@@ -32,8 +32,21 @@ export default function Layout(){
           <span className="nav-title">{loc.pathname}</span>
         </div>
         <div className="nav-right">
-          <Link className="badge-maker" to="https://yatou.ci" target="_blank" rel="noreferrer">BY <span className="gradtext">yatou.ci</span></Link>
-        </div>
+  <a
+    className="by-link"
+    href="https://yatou.ci"
+    target="_blank"
+    rel="noreferrer"
+    aria-label="Visiter yatou.ci"
+  >
+    <span className="by-pill">
+      <span className="by">BY</span>
+      <span className="brand-gradient">yatou.ci</span>
+      <span className="country">Côte d’Ivoire</span>
+    </span>
+  </a>
+</div>
+
       </nav>
 
       <Outlet />
