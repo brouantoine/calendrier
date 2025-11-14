@@ -189,3 +189,17 @@ a { text-decoration: none; }
 
 /* assure la cohérence marque */
 .navbar .brand-name, .login-foot a { text-decoration: none }
+
+
+/* Masque les séparateurs textuels */
+.sep, .slash { display:none !important; }
+
+/* Supprime les slash automatiques des breadcrumbs (ex. Bootstrap) */
+.breadcrumb-item + .breadcrumb-item::before,
+.crumb + .crumb::before {
+  content: "" !important;   /* pas de “/” */
+  margin: 0 !important;
+}
+
+/* Garde un espacement propre entre le titre et la puce “BY …” */
+.topbar .left, .crumbs { gap: 12px; }
