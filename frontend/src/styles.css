@@ -1,292 +1,95 @@
-/* ====== PALETTE ORANGE ONLY ====== */
+/* ========= PALETTE ORANGE (unique) ========= */
 :root{
-  --primary:#FF6B00;         /* orange unique */
-  --primary-600:#E65F00;     /* hover/press */
-  --primary-100:#FFF3E9;     /* surfaces douces */
-  --ring:#FFD7B0;            /* bordures */
-  --bg:#FFFFFF;
-  --card:#FFFFFF;
-  --text:#202124;            /* lisible */
-  --muted:#6B7280;
-  --ok:#22C55E;
+  --primary:#FF6B00;           /* orange */
+  --primary-600:#E65F00;       /* hover */
+  --primary-100:#FFF3E9;       /* surface douce */
+  --ring:#FFD7B0;              /* bordures / cercles */
+  --bg:#FFFFFF; --card:#FFFFFF;
+  --text:#202124; --muted:#6B7280; --ok:#22C55E;
   --shadow:0 6px 18px rgba(255,107,0,.15);
   --shadow-strong:0 10px 28px rgba(255,107,0,.24);
 }
 
-/* ====== Base ====== */
+/* ===== Base ===== */
 *{box-sizing:border-box}
-html,body,#root{height:100%}
-body{
-  margin:0;
-  -webkit-font-smoothing:antialiased;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,
-               "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  background:var(--bg); color:var(--text);
-}
-h1,h2,h3,p,span,div,button{color:var(--text)}
+html,body,#root{height:100%}  body{margin:0;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial}
+a{color:inherit;text-decoration:none}
 .container{max-width:1024px;margin:0 auto;padding:16px}
 
-/* ====== Navbar minimal, sticky ====== */
-.navbar{
-  position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 16px; background:#fff;
-  border-bottom:1px solid var(--ring); box-shadow:var(--shadow);
-}
-.nav-left{display:flex; align-items:center; gap:10px}
+/* ===== Navbar ===== */
+.navbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:#fff;border-bottom:1px solid var(--ring);box-shadow:var(--shadow)}
+.nav-left{display:flex;align-items:center;gap:10px}
 .logo-dot{width:12px;height:12px;border-radius:999px;background:var(--primary)}
-.brand-name{font-weight:800;text-decoration:none}
-.nav-right{display:flex;gap:8px}
+.brand-name{font-weight:800}
 
-/* ====== Boutons ====== */
-.button{
-  appearance:none; border:none; cursor:pointer;
-  border-radius:14px; padding:10px 14px; font-weight:700;
-  background:var(--primary); color:#fff; box-shadow:var(--shadow);
-  transition:transform .05s ease, box-shadow .15s ease, background .15s ease;
-}
-.button:hover{background:var(--primary-600); box-shadow:var(--shadow-strong)}
-.button.ghost{background:var(--primary-100); color:var(--text); box-shadow:none; border:1px solid var(--ring)}
-.button.link{background:transparent; color:var(--primary); padding:6px 8px}
-.icon-btn{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px}
+/* ===== Boutons ===== */
+.button{appearance:none;border:none;cursor:pointer;border-radius:14px;padding:10px 14px;font-weight:700;
+  background:var(--primary);color:#fff;box-shadow:var(--shadow);transition:transform .05s,box-shadow .15s,background .15s}
+.button:hover{background:var(--primary-600);box-shadow:var(--shadow-strong)}
+.button.ghost{background:var(--primary-100);color:var(--text);border:1px solid var(--ring);box-shadow:none}
+.btn-sm{padding:7px 10px;font-size:13px;border-radius:12px}
+.nav-arrow{min-width:36px;padding:6px 10px;border-radius:12px}
 
-/* ====== Cards, inputs ====== */
-.card{background:var(--card); border:1px solid var(--ring); border-radius:18px; padding:14px; box-shadow:var(--shadow)}
-.header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px 0 14px}
-.header h2{margin:0;font-weight:800}
-.header .actions{display:flex;gap:8px;align-items:center}
+/* ===== Cartes / Inputs ===== */
+.card{background:var(--card);border:1px solid var(--ring);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
 .input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--ring);background:#fff}
 .row{display:grid;gap:12px}
-.row.cols-2{grid-template-columns:1fr 1fr}
 
-/* ====== Calendrier ====== */
-.calendar-wrap{width:100%}
-.grid-head{
-  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
-  gap:10px;margin:8px 0;color:var(--muted);font-weight:800
+/* ===== En-tête de page (Bonjour + actions + mois) ===== */
+.header{
+  display:grid;grid-template-columns:1fr auto;grid-template-areas:
+  "hello month"
+  "actions actions";
+  align-items:center;gap:12px;margin:8px 0 14px;
 }
+.header h2{grid-area:hello;margin:0;font-weight:800}
+.session-actions{grid-area:actions;display:flex;gap:8px;flex-wrap:wrap}
+.month-nav{grid-area:month;justify-self:end;display:grid;grid-template-columns:28px auto 28px;gap:8px;align-items:center}
+.month-label{font-weight:800}
+
+/* ===== Calendrier ===== */
+.calendar-wrap{width:100%}
+.grid-head{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:8px 0;color:var(--muted);font-weight:800}
 .grid-head-cell{text-align:center}
 
-.calendar-grid{
-  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px
-}
-.tile{
-  background:var(--primary-100);
-  border:1px solid var(--ring);
-  border-radius:16px; padding:12px; min-height:96px;
-  position:relative; cursor:pointer; transition:box-shadow .15s ease
-}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+
+/* tuiles compactes + cercles sur les jours */
+.tile{background:var(--primary-100);border:1px solid var(--ring);border-radius:16px;padding:12px;min-height:96px;
+  position:relative;cursor:pointer;transition:box-shadow .15s}
 .tile:hover{box-shadow:var(--shadow-strong)}
-.tile .day{font-weight:900;color:var(--muted)}
+.tile--muted{opacity:.6}
+.tile .day{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  border:2px solid var(--ring);border-radius:50%;font-weight:900;color:var(--muted);background:#fff}
+.tile.has-items .day{border-color:var(--primary);color:var(--primary-600)}
 .tile .title{margin-top:6px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tile .pip{position:absolute;right:12px;bottom:12px;width:10px;height:10px;background:var(--ok);border-radius:50%}
-.badge{position:absolute;right:10px;top:10px;background:var(--primary);color:#fff;
-  font-weight:800;border-radius:999px;padding:2px 8px;font-size:12px}
+.badge{position:absolute;right:10px;top:10px;background:var(--primary);color:#fff;font-weight:800;border-radius:999px;
+  padding:2px 8px;font-size:12px}
+.pip{position:absolute;right:12px;bottom:12px;width:10px;height:10px;background:var(--ok);border-radius:50%}
 
-/* ====== Liste des posts du jour ====== */
-.day-list{display:grid;gap:10px}
-.day-card{
-  display:grid;grid-template-columns:64px 1fr 20px;align-items:center;
-  background:#fff;border:1px solid var(--ring);border-radius:16px;padding:12px;text-decoration:none
-}
-.day-card:hover{box-shadow:var(--shadow-strong)}
-.day-card .time{font-weight:900;color:var(--primary)}
-.day-card .title{font-weight:800}
-
-/* ====== Loader (flou + volant qui tourne) ====== */
-.overlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(6px);
-  z-index:9999;display:flex;align-items:center;justify-content:center}
-.helm{width:64px;height:64px;animation:spin 2s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-
-/* ===== Liens : jamais soulignés, héritent de la couleur du texte ===== */
-a, a:link, a:visited { text-decoration: none; color: inherit; }
-a:hover, a:focus { text-decoration: none; opacity: .9; }
-
-/* Couvre les liens dans le calendrier, tuiles, en-têtes */
-.calendar a, .calendar-grid a, .grid-head a,
-.tile a, .day-card, .day-card a,
-.navbar a, .topbar a { text-decoration: none !important; color: inherit; }
-
-/* ===== Badge "BY …" avec typo comme l’exemple ===== */
-.by-pill{
-  display:inline-flex; align-items:center; gap:10px;
-  padding:8px 12px; border-radius:999px;
-  background:var(--bg-soft); border:1px solid var(--line);
-  box-shadow:var(--shadow); white-space:nowrap;
-}
-.by-pill .by{ font-weight:900; color:var(--primary); letter-spacing:.4px; }
-
-/* Texte marque en dégradé (bleu → orange, comme ton visuel) */
-.brand-gradient{
-  background:linear-gradient(90deg,#3b82f6 0%, #6d28d9 35%, #f97316 70%, #fb923c 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  font-weight:900; letter-spacing:.2px;
+/* ===== Mobile compact (≤540px) ===== */
+@media (max-width:540px){
+  .navbar{padding:10px 12px}
+  .by-pill{transform:scale(.9)}
+  .header{grid-template-columns:1fr;grid-template-areas:
+    "hello" "month" "actions";}
+  .month-nav{justify-self:center;margin-top:2px}
+  .session-actions .button{padding:8px 10px}
+  .btn-sm{font-size:12px}
+  .grid-head,.calendar-grid{gap:6px}
+  .tile{min-height:60px;padding:8px;border-radius:12px}
+  .tile .day{width:24px;height:24px;font-size:12px}
+  .tile .title{margin-top:4px;font-size:11px;line-height:1.1}
+  .badge{top:6px;right:6px;font-size:10px;padding:1px 6px}
+  .pip{right:6px;bottom:6px;width:8px;height:8px}
 }
 
-/* Suffixe pays */
-.by-pill .country{
-  font-weight:700; font-size:12px; color:var(--muted);
-  padding-left:6px; border-left:1px dashed var(--line);
-}
-
-/* Optionnel: le lien “BY …” devient cliquable sans changer le style */
-.by-link{ display:inline-flex; align-items:center; gap:10px; }
-
-
-/* ——— Liens sans soulignement partout ——— */
-a { text-decoration: none; }
-
-/* ——— Login ——— */
-.login-wrap{
-  min-height:100dvh; display:flex; align-items:center; justify-content:center;
-  background:#fff; padding:24px;
-}
-.login-card{
-  width:100%; max-width:420px; background:#fff;
-  border:1px solid var(--line); border-radius:20px; padding:24px;
-  /* lueur douce orangée */
-  box-shadow:
-    0 30px 70px rgba(255,107,0,.12),
-    var(--shadow);
-}
-.login-brand{ display:flex; align-items:center; gap:10px; margin-bottom:4px }
-.brand-yatou{
-  font-weight:900; font-size:24px; letter-spacing:.2px;
-  background:linear-gradient(90deg,#3B82F6,#7C3AED,#F97316); /* dégradé Y’atOu */
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.login-title{ margin:8px 0 16px; font-size:22px }
-
-.input-wrap{ position:relative }
-.input-icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.55 }
-.input.has-icon{ padding-left:44px }
-
-.login-btn{ width:100%; border-radius:14px; height:44px; margin-top:6px }
-
-.login-error{
-  margin-top:8px; background:#ffe2e2; border:1px solid #ffc5c5;
-  color:#a70000; padding:8px 10px; border-radius:10px; font-weight:700;
-}
-
-.login-foot{ margin-top:18px; display:flex; justify-content:center }
-.by-pill{
-  background:#FFF2E6; border:1px solid var(--line); color:var(--text);
-  padding:6px 12px; border-radius:999px; font-weight:800; box-shadow:var(--shadow);
-}
-.gradlink{
-  background:linear-gradient(90deg,#3B82F6,#7C3AED,#F97316);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-
-/* assure la cohérence marque */
-.navbar .brand-name, .login-foot a { text-decoration: none }
-
-
-/* Masque les séparateurs textuels */
-.sep, .slash { display:none !important; }
-
-/* Supprime les slash automatiques des breadcrumbs (ex. Bootstrap) */
-.breadcrumb-item + .breadcrumb-item::before,
-.crumb + .crumb::before {
-  content: "" !important;   /* pas de “/” */
-  margin: 0 !important;
-}
-
-/* Garde un espacement propre entre le titre et la puce “BY …” */
-.topbar .left, .crumbs { gap: 12px; }
-
-
-/* ===== Login : centrage parfait + espacement doux ===== */
-.login-wrap{
-  min-height:100dvh;                 /* occupe tout l’écran */
-  display:grid; place-items:center;  /* centrage horizontal + vertical */
-  padding:24px;
-  background:#fff;
-}
-
-.login-card{
-  width:100%; max-width:440px;
-  background:#fff;
-  border:1px solid var(--ring);
-  border-radius:22px;
-  padding:24px 22px 18px;
-  box-shadow:
-    0 30px 70px rgba(255,107,0,.12),
-    var(--shadow);
-}
-
-/* en-tête + titre */
-.login-brand{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-.login-title{ margin:8px 0 16px; font-size:22px; font-weight:800; }
-
-/* formulaire : légère séparation entre les champs */
-.login-form{ display:grid; gap:10px; }        /* <-- l’espacement entre inputs */
-.input.has-icon{ padding-left:44px; height:46px; }
-.input-icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.55; }
-
-/* bouton */
-.login-btn{ width:100%; height:48px; border-radius:14px; margin-top:6px; }
-
-/* badge bas de carte */
-.login-foot{ margin-top:18px; display:flex; justify-content:center; }
-
-
-/* ===== MOBILE COMPACT (≤ 540px) : 7 colonnes visibles, tuiles 1/4 taille ===== */
-@media (max-width: 540px){
-  /* nav & top */
-  .navbar{ padding:10px 12px }
-  .nav-left{ gap:8px }
-  .brand-name{ font-size:16px; font-weight:800 }
-  .nav-right{ gap:6px }
-  .by-pill{ transform:scale(.9); padding:6px 10px }
-
-  /* header (titre + actions) : ne déborde plus, passe sur 2 lignes si besoin */
-  .header{ flex-wrap:wrap; gap:8px; margin:10px 0 12px }
-  .header h2{ font-size:22px; margin:0 }
-  .header .actions{
-    display:grid;
-    grid-auto-flow:column;
-    grid-auto-columns:minmax(0,1fr);
-    gap:8px;
-  }
-  .button{ padding:8px 12px; border-radius:12px }
-  .button.ghost{ padding:8px 10px }
-  .icon-btn{ width:36px; height:36px }
-
-  /* grille calendrier : on supprime le min-width et on compacte fort */
-  .calendar-wrap{ overflow:visible; padding-bottom:0 }
-  .grid-head, .calendar-grid{
-    min-width:0;                           /* <- plus de 720px forcés */
-    grid-template-columns:repeat(7,1fr);   /* 7 colonnes qui tiennent */
-  }
-  .grid-head{
-    gap:6px; margin:6px 0 4px;
-    font-size:12px; letter-spacing:.2px;
-  }
-  .calendar-grid{ gap:6px }
-
-  /* tuiles ≈ 1/4 de l’aire d’avant */
-  .tile{
-    min-height:60px;       /* était ~96px */
-    padding:8px;           /* était 12px */
-    border-radius:12px;    /* un peu moins rond */
-  }
-  .tile .day{ font-size:12px }
-  .tile .title{
-    margin-top:4px; font-size:11px; line-height:1.1;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .badge{ top:6px; right:6px; font-size:10px; padding:1px 6px }
-  .pip{ right:6px; bottom:6px; width:8px; height:8px }
-}
-
-/* TRES PETITS ÉCRANS (≤ 380px) : encore un cran plus compact si nécessaire */
-@media (max-width: 380px){
-  .header h2{ font-size:20px }
-  .tile{ min-height:52px; padding:6px }
-  .tile .day{ font-size:11px }
-  .tile .title{ font-size:10.5px }
-  .badge{ font-size:9.5px }
-}
+/* ===== Badge BY (déjà en place dans ta barre) ===== */
+.by-pill{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:#FFF2E6;
+  border:1px solid var(--ring);box-shadow:var(--shadow);white-space:nowrap}
+.by-pill .by{font-weight:900;color:var(--primary);letter-spacing:.4px}
+.brand-gradient{background:linear-gradient(90deg,#3b82f6 0%, #6d28d9 35%, #f97316 70%, #fb923c 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;letter-spacing:.2px}
+.by-pill .country{font-weight:700;font-size:12px;color:var(--muted);padding-left:6px;border-left:1px dashed var(--ring)}

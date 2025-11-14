@@ -2,18 +2,16 @@ import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 
 export default function Calendar({ month, programs=[] }){
-  // regroupe par date ISO (yyyy-MM-dd)
   const byDate = programs.reduce((acc,p)=>{
-    const k = p.date; (acc[k] ??= []).push(p); return acc
+    const k=p.date; (acc[k]??=[]).push(p); return acc
   },{})
 
-  // calcule les jours à afficher (du lundi au dimanche, 6 lignes max)
-  const y = month.getFullYear(), m = month.getMonth()
-  const first = new Date(y,m,1)
-  const start = new Date(first); start.setDate(1 - ((first.getDay()+6)%7)) // lundi
-  const cells = Array.from({length:42}).map((_,i)=>{ const d=new Date(start); d.setDate(start.getDate()+i); return d })
+  const y=month.getFullYear(), m=month.getMonth()
+  const first=new Date(y,m,1)
+  const start=new Date(first); start.setDate(1-((first.getDay()+6)%7)) // lundi
+  const cells=Array.from({length:42},(_,i)=>{const d=new Date(start); d.setDate(start.getDate()+i); return d})
 
-  const monthStr = `${y}-${String(m+1).padStart(2,'0')}`
+  const monthStr=`${y}-${String(m+1).padStart(2,'0')}`
 
   return (
     <div className="calendar-wrap">
@@ -25,16 +23,18 @@ export default function Calendar({ month, programs=[] }){
 
       <div className="calendar-grid">
         {cells.map((d,i)=>{
-          const key = format(d,'yyyy-MM-dd')
-          const inMonth = format(d,'yyyy-MM') === monthStr
-          const list = byDate[key] || []
-          const firstTitle = list[0]?.title || ''
+          const key=format(d,'yyyy-MM-dd')
+          const inMonth=(format(d,'yyyy-MM')===monthStr)
+          const list=byDate[key]||[]
+          const firstTitle=list[0]?.title||''
+          const has=list.length>0
           return (
-            <Link to={`/day/${key}`} className={`tile ${inMonth ? '' : 'tile--muted'}`} key={i}>
+            <Link to={`/day/${key}`} key={i}
+              className={`tile ${inMonth?'':'tile--muted'} ${has?'has-items':''}`}>
               <div className="day">{format(d,'dd')}</div>
               {firstTitle && <div className="title">{firstTitle}</div>}
-              {list.length>0 && <span className="badge">{list.length}</span>}
-              {list.length>0 && <span className="pip" />}
+              {has && <span className="badge">{list.length}</span>}
+              {has && <span className="pip" />}
             </Link>
           )
         })}
