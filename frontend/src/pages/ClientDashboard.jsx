@@ -27,26 +27,30 @@ export default function ClientDashboard(){
       <div className="header">
         <h2>Bonjour 👋</h2>
 
-        <div className="actions">
-          {/* rangée 1 (admin | logout) */}
+        {/* Mois centré, entre les flèches */}
+        <div className="month-nav">
+          <button className="button nav-arrow" onClick={prevMonth}>◀</button>
+          <span className="month-label">
+            {format(month,'LLLL yyyy',{locale:fr})}
+          </span>
+          <button className="button nav-arrow" onClick={nextMonth}>▶</button>
+        </div>
+
+        {/* Actions de session, réduites */}
+        <div className="session-actions">
           {me?.is_staff && (
-            <Link className="button button--sm admin" to="/admin">Espace Admin</Link>
+            <Link className="button btn-sm" to="/admin">Espace Admin</Link>
           )}
           <button
-            className="button ghost button--sm logout"
+            className="button ghost btn-sm"
             onClick={()=>{
-              localStorage.removeItem('access');
-              localStorage.removeItem('refresh');
-              window.location.href='/login';
+              localStorage.removeItem('access')
+              localStorage.removeItem('refresh')
+              window.location.href='/login'
             }}
           >
             Se déconnecter
           </button>
-
-          {/* rangée 2 (prev | mois | next) */}
-          <button className="button icon-btn prev" onClick={prevMonth}>◀</button>
-          <span className="month-label">{format(month,'LLLL yyyy',{locale:fr})}</span>
-          <button className="button icon-btn next" onClick={nextMonth}>▶</button>
         </div>
       </div>
 
