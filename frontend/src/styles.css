@@ -140,3 +140,52 @@ a:hover, a:focus { text-decoration: none; opacity: .9; }
 
 /* Optionnel: le lien “BY …” devient cliquable sans changer le style */
 .by-link{ display:inline-flex; align-items:center; gap:10px; }
+
+
+/* ——— Liens sans soulignement partout ——— */
+a { text-decoration: none; }
+
+/* ——— Login ——— */
+.login-wrap{
+  min-height:100dvh; display:flex; align-items:center; justify-content:center;
+  background:#fff; padding:24px;
+}
+.login-card{
+  width:100%; max-width:420px; background:#fff;
+  border:1px solid var(--line); border-radius:20px; padding:24px;
+  /* lueur douce orangée */
+  box-shadow:
+    0 30px 70px rgba(255,107,0,.12),
+    var(--shadow);
+}
+.login-brand{ display:flex; align-items:center; gap:10px; margin-bottom:4px }
+.brand-yatou{
+  font-weight:900; font-size:24px; letter-spacing:.2px;
+  background:linear-gradient(90deg,#3B82F6,#7C3AED,#F97316); /* dégradé Y’atOu */
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.login-title{ margin:8px 0 16px; font-size:22px }
+
+.input-wrap{ position:relative }
+.input-icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.55 }
+.input.has-icon{ padding-left:44px }
+
+.login-btn{ width:100%; border-radius:14px; height:44px; margin-top:6px }
+
+.login-error{
+  margin-top:8px; background:#ffe2e2; border:1px solid #ffc5c5;
+  color:#a70000; padding:8px 10px; border-radius:10px; font-weight:700;
+}
+
+.login-foot{ margin-top:18px; display:flex; justify-content:center }
+.by-pill{
+  background:#FFF2E6; border:1px solid var(--line); color:var(--text);
+  padding:6px 12px; border-radius:999px; font-weight:800; box-shadow:var(--shadow);
+}
+.gradlink{
+  background:linear-gradient(90deg,#3B82F6,#7C3AED,#F97316);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* assure la cohérence marque */
+.navbar .brand-name, .login-foot a { text-decoration: none }
