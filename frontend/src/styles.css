@@ -99,13 +99,6 @@ h1,h2,h3,p,span,div,button{color:var(--text)}
 .helm{width:64px;height:64px;animation:spin 2s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ====== Mobile: scroll 7 colonnes sans casser la grille ====== */
-@media (max-width:900px){
-  .container{padding:12px}
-  .calendar-wrap{overflow-x:auto;padding-bottom:8px}
-  .grid-head,.calendar-grid{min-width:720px}
-}
-
 
 /* ===== Liens : jamais soulignés, héritent de la couleur du texte ===== */
 a, a:link, a:visited { text-decoration: none; color: inherit; }
@@ -238,3 +231,62 @@ a { text-decoration: none; }
 
 /* badge bas de carte */
 .login-foot{ margin-top:18px; display:flex; justify-content:center; }
+
+
+/* ===== MOBILE COMPACT (≤ 540px) : 7 colonnes visibles, tuiles 1/4 taille ===== */
+@media (max-width: 540px){
+  /* nav & top */
+  .navbar{ padding:10px 12px }
+  .nav-left{ gap:8px }
+  .brand-name{ font-size:16px; font-weight:800 }
+  .nav-right{ gap:6px }
+  .by-pill{ transform:scale(.9); padding:6px 10px }
+
+  /* header (titre + actions) : ne déborde plus, passe sur 2 lignes si besoin */
+  .header{ flex-wrap:wrap; gap:8px; margin:10px 0 12px }
+  .header h2{ font-size:22px; margin:0 }
+  .header .actions{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(0,1fr);
+    gap:8px;
+  }
+  .button{ padding:8px 12px; border-radius:12px }
+  .button.ghost{ padding:8px 10px }
+  .icon-btn{ width:36px; height:36px }
+
+  /* grille calendrier : on supprime le min-width et on compacte fort */
+  .calendar-wrap{ overflow:visible; padding-bottom:0 }
+  .grid-head, .calendar-grid{
+    min-width:0;                           /* <- plus de 720px forcés */
+    grid-template-columns:repeat(7,1fr);   /* 7 colonnes qui tiennent */
+  }
+  .grid-head{
+    gap:6px; margin:6px 0 4px;
+    font-size:12px; letter-spacing:.2px;
+  }
+  .calendar-grid{ gap:6px }
+
+  /* tuiles ≈ 1/4 de l’aire d’avant */
+  .tile{
+    min-height:60px;       /* était ~96px */
+    padding:8px;           /* était 12px */
+    border-radius:12px;    /* un peu moins rond */
+  }
+  .tile .day{ font-size:12px }
+  .tile .title{
+    margin-top:4px; font-size:11px; line-height:1.1;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .badge{ top:6px; right:6px; font-size:10px; padding:1px 6px }
+  .pip{ right:6px; bottom:6px; width:8px; height:8px }
+}
+
+/* TRES PETITS ÉCRANS (≤ 380px) : encore un cran plus compact si nécessaire */
+@media (max-width: 380px){
+  .header h2{ font-size:20px }
+  .tile{ min-height:52px; padding:6px }
+  .tile .day{ font-size:11px }
+  .tile .title{ font-size:10.5px }
+  .badge{ font-size:9.5px }
+}
