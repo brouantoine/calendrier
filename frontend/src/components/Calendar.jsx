@@ -1,44 +1,44 @@
-import { addDays, startOfMonth, endOfMonth, startOfWeek, endOfWeek, format, isSameMonth } from 'date-fns'
-import fr from 'date-fns/locale/fr'
-import { useNavigate } from 'react-router-dom'
+import { format } from 'date-fns'
+import { Link } from 'react-router-dom'
 
 export default function Calendar({ month, programs=[] }){
-  const navigate = useNavigate()
-  const first = startOfWeek(startOfMonth(month), { weekStartsOn: 1 })
-  const last  = endOfWeek(endOfMonth(month),   { weekStartsOn: 1 })
-  const days = []; for(let d=first; d<=last; d=addDays(d,1)) days.push(d)
-
-  // groupage par date
+  // regroupe par date ISO (yyyy-MM-dd)
   const byDate = programs.reduce((acc,p)=>{
-    (acc[p.date] ||= []).push(p); return acc
-  }, {})
+    const k = p.date; (acc[k] ??= []).push(p); return acc
+  },{})
+
+  // calcule les jours à afficher (du lundi au dimanche, 6 lignes max)
+  const y = month.getFullYear(), m = month.getMonth()
+  const first = new Date(y,m,1)
+  const start = new Date(first); start.setDate(1 - ((first.getDay()+6)%7)) // lundi
+  const cells = Array.from({length:42}).map((_,i)=>{ const d=new Date(start); d.setDate(start.getDate()+i); return d })
+
+  const monthStr = `${y}-${String(m+1).padStart(2,'0')}`
 
   return (
-    <>
+    <div className="calendar-wrap">
       <div className="grid-head">
-        {["LUN","MAR","MER","JEU","VEN","SAM","DIM"].map(d => <div key={d} className="grid-head-cell">{d}</div>)}
+        {['LUN','MAR','MER','JEU','VEN','SAM','DIM'].map(d=>(
+          <div key={d} className="grid-head-cell">{d}</div>
+        ))}
       </div>
+
       <div className="calendar-grid">
-        {days.map(d=>{
+        {cells.map((d,i)=>{
           const key = format(d,'yyyy-MM-dd')
-          const items = byDate[key] || []
-          const first4 = items[0]?.title?.slice(0,4) || ''
+          const inMonth = format(d,'yyyy-MM') === monthStr
+          const list = byDate[key] || []
+          const firstTitle = list[0]?.title || ''
           return (
-            <div key={key}
-              className={`tile ${isSameMonth(d,month)?'':'tile--muted'}`}
-              onClick={()=> items.length && navigate(`/day/${key}`)}>
-              <div className="day">{format(d,'dd',{locale:fr})}</div>
-              {!!items.length && (
-                <>
-                  <div className="mask">{first4}<span className="dots"/></div>
-                  <span className="pip"/>
-                  {items.length>1 && <span className="badge">{items.length}</span>}
-                </>
-              )}
-            </div>
+            <Link to={`/day/${key}`} className={`tile ${inMonth ? '' : 'tile--muted'}`} key={i}>
+              <div className="day">{format(d,'dd')}</div>
+              {firstTitle && <div className="title">{firstTitle}</div>}
+              {list.length>0 && <span className="badge">{list.length}</span>}
+              {list.length>0 && <span className="pip" />}
+            </Link>
           )
         })}
       </div>
-    </>
+    </div>
   )
 }
