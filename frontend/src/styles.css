@@ -203,3 +203,38 @@ a { text-decoration: none; }
 
 /* Garde un espacement propre entre le titre et la puce “BY …” */
 .topbar .left, .crumbs { gap: 12px; }
+
+
+/* ===== Login : centrage parfait + espacement doux ===== */
+.login-wrap{
+  min-height:100dvh;                 /* occupe tout l’écran */
+  display:grid; place-items:center;  /* centrage horizontal + vertical */
+  padding:24px;
+  background:#fff;
+}
+
+.login-card{
+  width:100%; max-width:440px;
+  background:#fff;
+  border:1px solid var(--ring);
+  border-radius:22px;
+  padding:24px 22px 18px;
+  box-shadow:
+    0 30px 70px rgba(255,107,0,.12),
+    var(--shadow);
+}
+
+/* en-tête + titre */
+.login-brand{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.login-title{ margin:8px 0 16px; font-size:22px; font-weight:800; }
+
+/* formulaire : légère séparation entre les champs */
+.login-form{ display:grid; gap:10px; }        /* <-- l’espacement entre inputs */
+.input.has-icon{ padding-left:44px; height:46px; }
+.input-icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.55; }
+
+/* bouton */
+.login-btn{ width:100%; height:48px; border-radius:14px; margin-top:6px; }
+
+/* badge bas de carte */
+.login-foot{ margin-top:18px; display:flex; justify-content:center; }

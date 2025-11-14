@@ -25,29 +25,24 @@ export default function Layout(){
 
   return (
     <>
-      <nav className="navbar">
-        <div className="nav-left">
-          <span className="logo-dot" />
-          <Link to="/" className="brand-name">Calendrier éditorial</Link>
-          <span className="nav-title">{loc.pathname}</span>
-        </div>
-        <div className="nav-right">
-  <a
-    className="by-link"
-    href="https://yatou.ci"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="Visiter yatou.ci"
-  >
-    <span className="by-pill">
-      <span className="by">BY</span>
-      <span className="brand-gradient">yatou.ci</span>
-      <span className="country">Côte d’Ivoire</span>
-    </span>
-  </a>
-</div>
+<nav className="navbar">
+  <div className="nav-left">
+    <span className="logo-dot" />
+    <Link to="/" className="brand-name">Calendrier éditorial</Link>
+    {/* plus de nav-title ici -> plus de "/" */}
+  </div>
 
-      </nav>
+  <div className="nav-right">
+    <a className="by-link" href="https://yatou.ci" target="_blank" rel="noreferrer" aria-label="Visiter yatou.ci">
+      <span className="by-pill">
+        <span className="by">BY</span>
+        <span className="brand-gradient">yatou.ci</span>
+        <span className="country">Côte d’Ivoire</span>
+      </span>
+    </a>
+  </div>
+</nav>
+
 
       <Outlet />
 
